@@ -1,11 +1,14 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const session = require('express-session');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import session from 'express-session';
+import dotenv from 'dotenv';
 
-const usersRouter = require('./routes/users');
+import usersRouter from './routes/users';
+
+dotenv.config();
 
 const app = express();
 
@@ -30,7 +33,7 @@ app.use(
 
 app.use('/', usersRouter);
 
-const port = 8080;
+const port = 5050;
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -38,10 +41,10 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true
   })
-  .then((result) => console.log('Database connected successfully'))
-  .then((r) =>
+  .then(result => console.log('Database connected successfully'))
+  .then(r =>
     app.listen(port, function () {
       console.log('Listening on port ' + port);
     })
   )
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));

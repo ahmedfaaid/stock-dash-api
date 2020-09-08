@@ -1,6 +1,11 @@
-const express = require('express');
+import express from 'express';
+import { signup, login, logout } from '../controllers/user';
 const router = express.Router();
-const { signup, login, logout } = require('../controllers/user');
+
+/* GET user index */
+router.get('/', (req, res) => {
+  res.send('Users');
+});
 
 /* POST add a new user to the DB */
 router.post('/signup', signup);
@@ -11,4 +16,4 @@ router.post('/login', login);
 /* POST log user out */
 router.post('/logout', logout);
 
-module.exports = router;
+export default router;
