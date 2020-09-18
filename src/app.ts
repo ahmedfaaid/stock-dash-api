@@ -16,7 +16,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+  })
+);
 app.use(
   session({
     name: 'faaid_qid',
@@ -34,6 +39,8 @@ app.use(
 app.use('/', usersRouter);
 
 const port = 5050;
+
+mongoose.set('debug', true);
 
 mongoose
   .connect(process.env.MONGO_URI, {
