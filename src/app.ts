@@ -27,7 +27,6 @@ app.use(
     name: 'faaid_qid',
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 30,
-      httpOnly: true,
       sameSite: 'lax'
     },
     secret: process.env.SECRET,
